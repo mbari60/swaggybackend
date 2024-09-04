@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Offer Booking Notification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333333;
+        }
+        p {
+            color: #555555;
+            line-height: 1.6;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .signature {
+            color: #777777;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>New Offer Booking Notification</h1>
+        <p>Hello Admin,</p>
+        <p>A new offer booking has been made by {{ user.username }}.</p>
+        <p>Offer Details:</p>
+        <ul>
+            <li>Name: {{ offer.offer_name }}</li>
+            <li>Price: {{ offer.offer_price }}</li>
+        </ul>
+        <p>Contact Details:</p>
+        <ul>
+            <li>Name: {{ user.username }}</li>
+            <li>Email: {{ user.email }}</li>
+            <li>Phone: {{ user.phone }}</li>
+        </ul>
+        <p class="signature">Best regards,<br>The Admin Team</p>
+    </div>
+</body>
+</html>

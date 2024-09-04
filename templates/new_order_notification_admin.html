@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Order Notification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+        .item-details {
+            font-weight: bold;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>New Order Notification</h1>
+        <p>Hi Admin,</p>
+        <p>A new order has been placed.</p>
+        <p>customer: {{ user.username }}</p>
+        <p>Contact Details:</p>
+        <p>Customer Phone Number: {{ user.phone }}</p>
+        <p>Customer Email Address: {{ user.email }}</p>
+        <p>Order ID: {{ order.id }}</p>
+        <p>Total Amount: Ksh.{{ order.total_amount }}</p>
+        <p>Ordered Items:</p>
+        <ul>
+            {% for item in order.order_items %}
+                <li>
+                    <span class="item-details">Product id:</span> {{ item.product_id }}<br>
+                    <span class="item-details">Product Name:</span> {{ item.product_name }}<br>
+                    <span class="item-details">Quantity:</span> {{ item.quantity }}<br>
+                    <span class="item-details">Unit Price:</span> Ksh.{{ item.unit_price }}
+                </li>
+            {% endfor %}
+        </ul>
+        <p>Please check the admin panel for more details.</p>
+    </div>
+</body>
+</html>
