@@ -19,7 +19,7 @@ from resources.notifications import NotificationResource
 from resources.offerbookings import UserOfferResource
 
 from resources.orders import create_order, cancel_order, get_all_orders
-from resources.passwords import reset_password, redeem_merit_points, change_password , order_delivered
+from resources.passwords import reset_password, redeem_merit_points, change_password , order_delivered , get_profile
 
 from admin.myusers import adminUsers
 
@@ -62,6 +62,8 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(days=30)
 
 #defining the routes
 api.add_resource(adminUsers, '/users')
+# api.add_resource(adminUsers, '/users/<int:user_id>/<string:action>')
+
 api.add_resource(userSchema, '/registration', '/registration/<int:id>')
 api.add_resource(Login, '/login')
 
@@ -80,10 +82,12 @@ app.add_url_rule('/orders/<int:order_id>', 'cancel_order', cancel_order, methods
 app.add_url_rule('/orders', 'get_all_orders', get_all_orders, methods=['GET'])
 
 #password endpoints
+app.add_url_rule('/profile', 'get_profile', get_profile, methods=['GET'])
 app.add_url_rule('/resetpassword/<int:id>', 'reset_password', reset_password, methods=['PUT'])
 app.add_url_rule('/redeemmeritpoints', 'redeem_merit_points', redeem_merit_points, methods=['PUT'])
 app.add_url_rule('/changepassword', 'change_password', change_password, methods=['PUT'])
-app.add_url_rule('/deliverydone/<int:order_id>',order_delivered ,methods=['POST'])
+app.add_url_rule('/deliverydone/<int:order_id>', 'order_delivered', order_delivered, methods=['POST'])
+
 
 
 if __name__ == '__main__':
