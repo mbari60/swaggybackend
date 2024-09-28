@@ -35,8 +35,8 @@ JWTManager(app)
 app.secret_key = os.environ.get('APP_SECRET_KEY')
 
 #database and error handling setup
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
-app.config['SQLALCHEMY_DATABASE_URI'] =   'sqlite:///mydatabase.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+# app.config['SQLALCHEMY_DATABASE_URI'] =   'sqlite:///mydatabase.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['BUNDLE_ERRORS'] = True
 
@@ -47,16 +47,16 @@ migration = Migrate(app, db)
 # Email configuration
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'kevinmbari60@gmail.com'
-app.config['MAIL_PASSWORD'] = 'xuxgsuwiyofhkbax'
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 
 
 # Setup for JWT
-# app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key_here'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+# app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key_here'
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(days=30)
 
 
