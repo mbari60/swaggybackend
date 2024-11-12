@@ -80,8 +80,9 @@ class userSchema(Resource):
                 "user": user_json
             }, 201
 
-        except:
-            return {"message":"Failed to register user", "status": "fail"}, 500
+        except Exception as e:
+             print(f"Error: {e}")
+             return {"message": "Failed to register user", "status": "fail"}, 500
 
     @jwt_required()
     def delete(self,id=None):

@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from flask_cors import CORS
+from dotenv import load_dotenv
 from flask_jwt_extended import JWTManager
 from datetime import timedelta
 from flask_migrate import Migrate
@@ -30,15 +31,21 @@ CORS(app)
 api = Api(app)
 bcrypt = Bcrypt(app)
 JWTManager(app)
+load_dotenv()
 
 #secret key for the app 
-app.secret_key = os.environ.get('APP_SECRET_KEY')
+# app.secret_key = os.environ.get('APP_SECRET_KEY')
+# app.config['JWT_SECRET_KEY'] = os.environ.get('APP_SECRET_KEY')
 
 #database and error handling setup
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
-# app.config['SQLALCHEMY_DATABASE_URI'] =   'sqlite:///mydatabase.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] =   'sqlite:///mydatabase.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['BUNDLE_ERRORS'] = True
+
+app.config['JWT_SECRET_KEY'] = os.environ.get('APP_SECRET_KEY')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(days=30)
 
 
 db.init_app(app)
@@ -55,10 +62,12 @@ mail = Mail(app)
 
 
 # Setup for JWT
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-# app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key_here'
-app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(days=30)
+# app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+# # app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key_here'
+# app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(days=30)
 
+# print("APP_SECRET_KEY:", os.environ.get('APP_SECRET_KEY'))
+# print("SECRET_KEY:", os.environ.get('SECRET_KEY'))
 
 #defining the routes
 api.add_resource(adminUsers, '/users')
